@@ -13,7 +13,7 @@ const initdb = async () =>
     },
   });
   
-  // TODO: Add logic for a method that gets all the content from the database
+  // : Add logic for a method that gets all the content from the database
   export const getDb = async () => {
     console.log('GET from database');
     const jateDb = await openDB('jate', 1);
@@ -24,7 +24,7 @@ const initdb = async () =>
     console.log('result.value', result);
   };
 
-// TODO: Add logic for a method that gets all the content from the database
+// : Add logic for a method that gets all the content from the database
 export const putDb = async (content) => {
   console.log('putDb to database');
   const jateDb = await openDB('jate', 1);

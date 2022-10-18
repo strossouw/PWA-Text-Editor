@@ -24,7 +24,6 @@ const initdb = async () =>
     console.log('result.value', result);
   };
 
-
 // TODO: Add logic for a method that gets all the content from the database
 export const putDb = async (content) => {
   console.log('putDb to database');

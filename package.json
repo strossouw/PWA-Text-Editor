@@ -5,12 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
-    "start": "cd server && node server.js",
-    "server": "cd server node server.js --ignore client",
+    "start": "npm run build && cd server && node server.js",
+    "server": "cd server nodemon server.js --ignore client",
     "build": "cd client && npm run build",
-    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\" ",
-    "client": "cd client && npm start",
-    "heroku-prebuild": "npm install --dev"
+    "install": "cd client && npm i && cd ../server && npm i",
+    "client": "cd client && npm start"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4",
+    "webpack-cli": "^4.10.0",
     "workbox-webpack-plugin": "^6.5.4"
   }
 }

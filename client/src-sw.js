@@ -13,6 +13,7 @@ const pageCache = new CacheFirst({
     new CacheableResponsePlugin({
       statuses: [0, 200],
     }),
+
     new ExpirationPlugin({
       maxAgeSeconds: 30 * 24 * 60 * 60,
     }),
@@ -24,23 +25,39 @@ warmStrategyCache({
   strategy: pageCache,
 });
 
-
-
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// : Implement asset caching
+//  Implement asset caching
+
 registerRoute(
-  ({ request }) => request.destination === 'image',
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
   new CacheFirst({
-    cacheName: 'my-image-cache',
+    cacheName: 'jate-asset-cache',
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new ExpirationPlugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
-      }),
     ],
   })
+);
+
+//  Implement asset caching
+
+registerRoute(
+  ({ request }) => request.destination === 'image',
+  new CacheFirst({
+
+    cacheName: 'jate-image-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [200],
+      }),
+
+      new ExpirationPlugin({
+        maxEntries: 20,
+        maxAgeSeconds: 60 * 60 * 24 * 30, 
+      }),
+
+    ],
+  }),
 );

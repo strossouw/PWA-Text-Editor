@@ -36,3 +36,4 @@ export const putDb = async (content) => {
 };
 
 initdb();
+
